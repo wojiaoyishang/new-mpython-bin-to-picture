@@ -1,3 +1,4 @@
+import gc
 from mpython import *
 
 # 该函数用于绘制一行图像
@@ -91,7 +92,9 @@ def print_from_bin(x, y, fp, target_image_name, buff_size=None, color_invert=Fal
         if b_offset >= b:
             b = fp.readinto(buff_view)
             b_offset = 0  # 重置偏移量
-
+    
+    del buff, buff_view, temp
+    gc.collect()
     return image_width, image_height
 
 
@@ -145,7 +148,9 @@ def get_bin_data_pos(fp, target_image_name, buff_size=None):
         if b_offset >= b:
             b = fp.readinto(buff_view)
             b_offset = 0  # 重置偏移量
-
+    
+    del buff, buff_view, temp
+    gc.collect()
     return result
 
 
@@ -207,5 +212,7 @@ def print_from_bin_by_pos(x, y, fp, pos, buff_size=None, color_invert=False, dra
         if b_offset >= b:
             b = fp.readinto(buff_view)
             b_offset = 0  # 重置偏移量
-
+            
+    del buff, buff_view, temp
+    gc.collect()
     return image_width, image_height
