@@ -24,11 +24,77 @@
 
 涉及两个源码： `encode2bin.py` 、 `bin2decode.py` 。这个两个是在计算机上（Python环境下）运行的。
 
-你可以新建一个 Python 文件，并将上面两个文件作为模块导入使用
+你可以新建一个 Python 文件，并将上面两个文件作为模块导入使用，或者直接在源文件添加代码运行。
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+下面是用 `encode2bin.py` 添加一个图片文件到bin文件的示例。**图片文件最好是灰度图片。**
+
+```python
+width, data = process_image(Image.open('bulb.png'))
+data = encode_image_data(data)
+write_to_bin("bulb", width, data, 'bin.bin')
+```
+
+![输入图片说明](IMAGES/image2.png)
+
+我们还尝试让 bin 文件容纳字体文件，不推荐这样做（因为在掌控板上很慢），但是我们保留了这个示例：
+
+```python
+font_to_bin("你的字体路径", 13, "font.bin")  # chs 参数允许你添加额外的字体
+```
+
+![输入图片说明](IMAGES/image3.png)
+
+bin文件在电脑上测试解码可以采用 `bin2decode.py` ：
+
+```python
+print_from_bin("bin.bin", "bulb")
+```
+
+![输入图片说明](IMAGES/image4.png)
+
+**在测试的时候，电脑上几乎瞬间输出图片文件，尤其对于遍历多图片的bin文件时。但是对于掌控板，图片越多的bin文件越慢，除非图片很快被定位，不然需要等上好几秒。**
+
++ 掌控板解码
+
+`bin2picture.py` 是给掌控板使用的，在读取bin文件时，为了加快遍历文件速度，我在找寻的代码上加入了缓存区，缓存区的大小默认是可用运行内存的 0.7 倍，可能对于多线程不是很友好，你可以通过调整 `buff_size` 参数来控制缓存区大小。
+
+将源码上传到掌控板，你可以使用模块导入的方式引用或者直接复制代码到你的程序中。下面是读取图片的示例：
+
+```python
+f = open("bin.bin", "rb")
+print_from_bin(0,0,f,"bulb")
+oled.show()
+```
+
+![输入图片说明](IMAGES/image5.png)
+
+对于 `print_from_bin` 函数的参数，代码中已经标注的很明白了。
+
+![输入图片说明](IMAGES/image6.png)
+
+当然，你也可以拿来打印字体，但是我们不建议这样做，这样只会让掌控板运行速度更慢。
+
+```python
+f = open("font.bin", "rb")
+r = get_bin_data_pos(f, list("I love Pikachu"))
+i = 0
+
+for x in "I love Pikachu":
+    gc.collect()
+    w, h = print_from_bin_by_pos(i,0,f, r[x])
+    i += w
+
+oled.show()
+```
+
+![输入图片说明](IMAGES/image7.png)
+
+你可以在最后使用 `gc.collect()` 来回收程序程序产生的内存冗余：
+
+```python
+import gc
+gc.collect()
+```
 
 #### 使用说明
 
