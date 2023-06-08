@@ -76,12 +76,12 @@ def write_to_bin(target_image_name, img_width, img_encode_data, img_bin_path, on
                 f.write(b'\xff' + width.encode('utf-8'))  # 写入图片宽度
                 f.write(b'\xff' + img_data)  # 写入图片数据
 
-def font_to_bin(font_path, font_size, img_bin_path):
+def font_to_bin(font_path, font_size, img_bin_path, chs=""):
     # 加载字体文件
     font = ImageFont.truetype(font_path, font_size)
 
     unicode_range = list(range(0x20, 0x7F))  # ASCII符号，数字和字母
-    chs = ""  # 其它字符
+
     for s in chs:
         unicode_range.append(ord(s))
 
