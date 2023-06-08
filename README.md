@@ -89,12 +89,9 @@ oled.show()
 
 ![输入图片说明](IMAGES/image7.png)
 
-你可以在最后使用 `gc.collect()` 来回收程序程序产生的内存冗余：
+最后函数会调用 `gc.collect()` 来回收函数产生的内存冗余。
 
-```python
-import gc
-gc.collect()
-```
+
 
 #### 使用说明
 
