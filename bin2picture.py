@@ -1,4 +1,3 @@
-import gc
 from mpython import *
 
 # 该函数用于绘制一行图像
