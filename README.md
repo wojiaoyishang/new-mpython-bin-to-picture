@@ -1,7 +1,7 @@
 # New-mpython-BinToPricture
 
 #### 介绍
-一个在掌控板(esp32-mpython)上打印图片的方法，通过牺牲存储与时间换取尽可能少的运行空间，这个项目自定义了一个新的bin文件格式用于保存图片数据。仓库中有三个文件： `解码(python).py` 、 `编码(python).py` 和 `bin2picture.py` 。
+一个在掌控板(esp32-mpython)上打印图片的方法，通过牺牲存储与时间换取尽可能少的运行空间，这个项目自定义了一个新的bin文件格式用于保存图片数据。仓库中有三个文件： `encode2bin.py` 、 `bin2decode.py` 和 `bin2picture.py` 。
 
 其中 `bin2picture.py` 文件是给 mpython 用的，用于解码并打印 bin 文件中的图片数据。其余的两个文件是给电脑编码 bin 文件与测试用的。在介绍如何使用这三个文件之前，不妨请先了解一下bin文件的构成。
 
@@ -18,7 +18,13 @@
 
 ![输入图片说明](IMAGES/image1.png)
 
-#### 安装教程
+#### 代码使用说明
+
++ 编码与测试代码使用
+
+涉及两个源码： `encode2bin.py` 、 `bin2decode.py` 。这个两个是在计算机上（Python环境下）运行的。
+
+你可以新建一个 Python 文件，并将上面两个文件作为模块导入使用
 
 1.  xxxx
 2.  xxxx
