@@ -1,4 +1,4 @@
-# From https://gitee.com/wojiaoyishang/new-mpython-bin-to-pricture
+# https://gitee.com/wojiaoyishang/new-mpython-bin-to-pricture
 
 import gc
 from mpython import *
@@ -135,7 +135,7 @@ def get_bin_data_pos(fp, target_image_name, buff_size=None):
         if buff[b_offset] == 255:  # '\xff'
             if empty_times % 3 == 1 and temp in target_image_name:  # 图片名称
                 found = True
-                result[temp.decode('UTF-8')] = fp.tell() - buff_size + b_offset - len(temp) - 1
+                result[temp.decode('UTF-8')] = fp.tell() - b + b_offset - len(temp) - 1
             empty_times += 1
             temp = bytearray()
         else:
@@ -182,8 +182,9 @@ def print_from_bin_by_pos(x, y, fp, pos, buff_size=None, color_invert=False, dra
 
     buff = bytearray(buff_size)  # 创建一个bytearray作为缓冲区
     b_offset = 0  # 设置读取缓冲区的位置偏移量
+    if pos < 0:
+        raise BaseException("pos is incorrect.")
     fp.seek(pos)
-
     buff_view = memoryview(buff)
     b = fp.readinto(buff_view)
     temp = bytearray()
@@ -191,7 +192,8 @@ def print_from_bin_by_pos(x, y, fp, pos, buff_size=None, color_invert=False, dra
     found, image_width, image_height = False, 0, 0
     point_count = 0
     c = 0 if not color_invert else 1
-
+    if buff[0] != 255:
+        raise BaseException("pos is incorrect.")
     while b:
         if buff[b_offset] == 255:  # '\xff'
             if empty_times % 3 == 1:
@@ -220,3 +222,6 @@ def print_from_bin_by_pos(x, y, fp, pos, buff_size=None, color_invert=False, dra
     del buff, buff_view, temp
     gc.collect()
     return image_width, image_height
+
+
+
