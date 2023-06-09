@@ -4,7 +4,7 @@ import gc
 from mpython import *
 
 # 该函数用于绘制一行图像
-def _draw_line(x, y, t, image_width, image_height, point_count, c, oled=oled):
+def _draw_line(x, y, t, image_width, image_height, point_count, c):
     """
     Args:
         x (int): 图像的起始 x 坐标
