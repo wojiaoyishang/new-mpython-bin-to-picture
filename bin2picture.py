@@ -59,7 +59,7 @@ def print_from_bin(x, y, fp, target_image_name, buff_size=None, color_invert=Fal
     """
     target_image_name = target_image_name.encode('utf-8')
 
-    buff = bytearray(buff_size if buff_size else int(gc.mem_free() * 0.7))  # 创建一个bytearray作为缓冲区
+    buff = bytearray(buff_size if buff_size else int(gc.mem_free() * 0.2))  # 创建一个bytearray作为缓冲区
     buff_view = memoryview(buff)
     fp.seek(0)
     b = fp.readinto(buff_view)  # 读取数据到缓冲区
@@ -119,7 +119,7 @@ def get_bin_data_pos(fp, target_image_name, buff_size=None):
     else:
         target_image_name = list(set(i.encode('utf-8') for i in target_image_name))
 
-    buff_size = buff_size if buff_size else int(gc.mem_free() * 0.7)
+    buff_size = buff_size if buff_size else int(gc.mem_free() * 0.2)
 
     buff = bytearray(buff_size)  # 创建一个bytearray作为缓冲区
     buff_view = memoryview(buff)
@@ -178,7 +178,7 @@ def print_from_bin_by_pos(x, y, fp, pos, buff_size=None, color_invert=False, dra
     point_count = 0
     c = 0 if not color_invert else 1  # 颜色设置
 
-    buff_size = buff_size if buff_size else int(gc.mem_free() * 0.7)
+    buff_size = buff_size if buff_size else int(gc.mem_free() * 0.2)
 
     buff = bytearray(buff_size)  # 创建一个bytearray作为缓冲区
     b_offset = 0  # 设置读取缓冲区的位置偏移量
