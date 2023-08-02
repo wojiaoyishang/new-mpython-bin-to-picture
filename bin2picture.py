@@ -183,7 +183,7 @@ def print_from_bin_by_pos(x, y, fp, pos, buff_size=None, color_invert=False, dra
     buff = bytearray(buff_size)  # 创建一个bytearray作为缓冲区
     b_offset = 0  # 设置读取缓冲区的位置偏移量
     if pos < 0:
-        raise BaseException("pos is incorrect.")
+        raise ValueError("pos is incorrect.")
     fp.seek(pos)
     buff_view = memoryview(buff)
     b = fp.readinto(buff_view)
@@ -193,7 +193,7 @@ def print_from_bin_by_pos(x, y, fp, pos, buff_size=None, color_invert=False, dra
     point_count = 0
     c = 0 if not color_invert else 1
     if buff[0] != 255:
-        raise BaseException("pos is incorrect.")
+        raise ValueError("pos is incorrect.")
     while b:
         if buff[b_offset] == 255:  # '\xff'
             if empty_times % 3 == 1:
