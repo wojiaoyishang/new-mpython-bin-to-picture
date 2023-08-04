@@ -49,7 +49,7 @@ def print_from_bin(x, y, fp, target_image_name, buff_size=None, color_invert=Fal
         y (int): 图像的起始 y 坐标
         fp (file): 需要读取的二进制文件
         target_image_name (str): 目标图像的名称
-        buff_size (int, optional): 缓冲区大小。如果未指定，则为可用内存的 70%
+        buff_size (int, optional): 缓冲区大小。如果未指定，则为可用内存的 20%
         color_invert (bool, optional): 是否颠倒颜色，默认为False
         draw_line_fun (function, optional): 用于绘制图像的函数，默认为_draw_line
 
@@ -107,7 +107,7 @@ def get_bin_data_pos(fp, target_image_name, buff_size=None):
     Args:
         fp (file): 需要读取的二进制文件
         target_image_name (str or list): 目标图像的名称，可以是单个图像名称或多个图像名称的列表
-        buff_size (int, optional): 缓冲区大小。如果未指定，则为可用内存的 70%
+        buff_size (int, optional): 缓冲区大小。如果未指定，则为可用内存的 20%
 
     Returns:
         result (dict): 字典，包含找到的每个目标图像名称及其在二进制文件中的位置
@@ -166,7 +166,7 @@ def print_from_bin_by_pos(x, y, fp, pos, buff_size=None, color_invert=False, dra
         y (int): 图像的起始 y 坐标
         fp (file): 需要读取的二进制文件
         pos (int): 目标图像在二进制文件中的位置
-        buff_size (int, optional): 缓冲区大小。如果未指定，则为可用内存的 70%
+        buff_size (int, optional): 缓冲区大小。如果未指定，则为可用内存的 20%
         color_invert (bool, optional): 是否颠倒颜色，默认为False
         draw_line_fun (function, optional): 用于绘制图像的函数，默认为_draw_line
 
