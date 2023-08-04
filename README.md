@@ -1,4 +1,4 @@
-# New-mpython-BinToPricture
+# New-mpython-BinToPicture
 
 #### 介绍
 一个在掌控板(esp32-mpython)上打印图片的方法，通过牺牲存储与时间换取尽可能少的运行空间，这个项目自定义了一个新的bin文件格式用于保存图片数据。仓库中有三个文件： `encode2bin.py` 、 `bin2decode.py` 和 `bin2picture.py` 。
