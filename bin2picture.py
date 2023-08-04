@@ -1,4 +1,4 @@
-# https://gitee.com/wojiaoyishang/new-mpython-bin-to-pricture
+# https://gitee.com/wojiaoyishang/new-mpython-bin-to-picture
 
 import gc
 from mpython import *
